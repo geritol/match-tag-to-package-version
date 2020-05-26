@@ -1,21 +1,23 @@
 const fs = require("fs");
 
-module.exports = (githubRef) => {
+module.exports = (gitRef, prefix = "refs/tags/") => {
   const rawPackageJson = fs.readFileSync("package.json", "utf8");
   const packageJson = JSON.parse(rawPackageJson);
 
-  if (!githubRef.match(/^refs\/tags\//)) {
+  if (!gitRef) {
     throw new Error("Current commit is not tagged in git");
   }
 
-  const [, tag] = githubRef.match(/^refs\/tags\/(.*)/);
   const { version } = packageJson;
+  const prefixedVersion = `${prefix}${version}`;
 
-  if (tag !== version) {
+  if (gitRef !== prefixedVersion) {
     throw new Error(
-      `Git tag (${tag}) does not match package.json version (${version})`
+      `Git tag (${gitRef}) does not match package.json version (${prefixedVersion})`
     );
   }
 
-  console.info(`Git tag (${tag}) matches package.json version (${version})`);
+  console.info(
+    `Git tag (${gitRef}) matches package.json version (${prefixedVersion})`
+  );
 };

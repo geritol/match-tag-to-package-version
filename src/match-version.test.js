@@ -22,7 +22,7 @@ describe("matchVersion", () => {
       "package.json": JSON.stringify({ version }),
     });
 
-    expect(() => matchVersion(`refs/foo`)).to.throw(Error, "not tagged");
+    expect(() => matchVersion()).to.throw(Error, "not tagged");
   });
 
   it("should throw an error there is no package.json present", () => {
@@ -41,5 +41,15 @@ describe("matchVersion", () => {
       Error,
       "Unexpected token"
     );
+  });
+
+  it("should not trow error when versions match with provided prefix", () => {
+    const prefix = "v";
+    const version = "0.0.0";
+    mock({
+      "package.json": JSON.stringify({ version }),
+    });
+
+    matchVersion(`${prefix}${version}`, prefix);
   });
 });
