@@ -1,8 +1,9 @@
 const matchVersion = require("./match-version");
+const core = require("@actions/core");
 
 try {
   matchVersion(process.env.GITHUB_REF, process.env.TAG_PREFIX);
 } catch (error) {
-  console.error(error.message);
+  core.error(error.message);
   process.exit(1);
 }
