@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@master
 
       - name: match-tag-to-package-version
-        uses: geritol/match-tag-to-package-version@0.0.1
+        uses: geritol/match-tag-to-package-version@0.1.0
