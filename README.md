@@ -31,3 +31,5 @@ jobs:
 
 The action outputs package.json version as `PACKAGE_VERSION`.  
 Eg. use it as `steps.match-tag-to-package-version.outputs.PACKAGE_VERSION` in other steps
+
+wip
