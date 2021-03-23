@@ -28,3 +28,13 @@ jobs:
       - run: npm test
         env:
           CI: true
+
+  test-e2e: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          echo "{\"version\": \"${GITHUB_REF}\"}" > package.json
+      - uses: ./
+        env:
+          TAG_PREFIX: ""
