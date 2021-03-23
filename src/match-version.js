@@ -1,4 +1,5 @@
 const fs = require("fs");
+const core = require("@actions/core");
 
 module.exports = (gitRef, prefix = "refs/tags/") => {
   const rawPackageJson = fs.readFileSync("package.json", "utf8");
@@ -17,7 +18,7 @@ module.exports = (gitRef, prefix = "refs/tags/") => {
     );
   }
 
-  console.info(
+  core.info(
     `Git tag (${gitRef}) matches package.json version (${prefixedVersion})`
   );
 };
