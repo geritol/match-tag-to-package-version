@@ -1,5 +1,6 @@
 const matchVersion = require("./match-version");
 const mock = require("mock-fs");
+const core = require("@actions/core");
 
 jest.mock("@actions/core", () => ({
   info: jest.fn(),
@@ -21,6 +22,11 @@ describe("matchVersion", () => {
 
     it("should not throw an error", () => {
       matchVersion(`refs/tags/${version}`);
+    });
+
+    it("should output the package version", () => {
+      matchVersion(`refs/tags/${version}`);
+      expect(core.setOutput).toHaveBeenCalledWith("PACKAGE_VERSION", version);
     });
   });
 

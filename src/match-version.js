@@ -21,4 +21,6 @@ module.exports = (gitRef, prefix = "refs/tags/") => {
   core.info(
     `Git tag (${gitRef}) matches package.json version (${prefixedVersion})`
   );
+
+  core.setOutput("PACKAGE_VERSION", version);
 };
