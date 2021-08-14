@@ -36,7 +36,7 @@ describe("matchVersion", () => {
       "package.json": JSON.stringify({ version }),
     });
 
-    expect(() => matchVersion()).toThrow(Error, "not tagged");
+    expect(() => matchVersion("refs/heads/master")).toThrow(Error, "not tagged");
   });
 
   it("should throw an error there is no package.json present", () => {
