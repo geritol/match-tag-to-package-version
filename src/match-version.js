@@ -1,7 +1,7 @@
 const fs = require("fs");
 const core = require("@actions/core");
 
-module.exports = (gitRef, prefix = "refs/tags/") => {
+module.exports = (gitRef, prefix = "") => {
   const rawPackageJson = fs.readFileSync("package.json", "utf8");
   const packageJson = JSON.parse(rawPackageJson);
 
@@ -10,6 +10,11 @@ module.exports = (gitRef, prefix = "refs/tags/") => {
   }
 
   const { version } = packageJson;
+  
+  if(!prefix.startsWith("refs/tags/")){
+    prefix = `refs/tags/${prefix}`
+  }
+  
   const prefixedVersion = `${prefix}${version}`;
 
   if (gitRef !== prefixedVersion) {
