@@ -28,6 +28,11 @@ describe("matchVersion", () => {
       matchVersion(`refs/tags/${version}`);
       expect(core.setOutput).toHaveBeenCalledWith("PACKAGE_VERSION", version);
     });
+
+    it("should output the tag version", () => {
+      matchVersion(`refs/tags/${version}`);
+      expect(core.setOutput).toHaveBeenCalledWith("TAG_VERSION", version);
+    });
   });
 
   it("should throw an error when not on ref tag", () => {

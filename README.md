@@ -30,5 +30,5 @@ jobs:
           # TAG_PREFIX may also be defined under the 'env' key. 
 ```
 
-The action outputs package.json version as `PACKAGE_VERSION`.  
-Eg. use it as `steps.match-tag-to-package-version.outputs.PACKAGE_VERSION` in other steps
+The action outputs package.json version as `PACKAGE_VERSION` and the tag (without 'refs/tags/') as `TAG_VERSION`.  
+Eg. use it as `steps.match-tag-to-package-version.outputs.PACKAGE_VERSION` in other steps.
