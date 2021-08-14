@@ -5,14 +5,15 @@ module.exports = (gitRef, prefix = "") => {
   const rawPackageJson = fs.readFileSync("package.json", "utf8");
   const packageJson = JSON.parse(rawPackageJson);
 
-  if (!gitRef.startsWith("refs/tags/")) {
+  const refsTags = "refs/tags/"
+  if (!gitRef.startsWith(refsTags)) {
     throw new Error("Current commit is not tagged in git");
   }
 
   const { version } = packageJson;
   
-  if(!prefix.startsWith("refs/tags/")){
-    prefix = `refs/tags/${prefix}`
+  if(!prefix.startsWith(refsTags)){
+    prefix = `${refsTags}${prefix}`;
   }
   
   const prefixedVersion = `${prefix}${version}`;
@@ -28,4 +29,5 @@ module.exports = (gitRef, prefix = "") => {
   );
 
   core.setOutput("PACKAGE_VERSION", version);
+  core.setOutput("TAG_VERSION", gitRef.substring(refsTags.length));
 };
