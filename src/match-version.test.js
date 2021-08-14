@@ -13,7 +13,7 @@ describe("matchVersion", () => {
   });
 
   describe(" when tag and version match", () => {
-    const version = "v0.0.0";
+    const version = "0.0.0";
     beforeEach(() => {
       mock({
         "package.json": JSON.stringify({ version }),
@@ -36,7 +36,7 @@ describe("matchVersion", () => {
   });
 
   it("should throw an error when not on ref tag", () => {
-    const version = "v0.0.0";
+    const version = "0.0.0";
     mock({
       "package.json": JSON.stringify({ version }),
     });
