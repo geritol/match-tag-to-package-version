@@ -5,7 +5,7 @@ module.exports = (gitRef, prefix = "") => {
   const rawPackageJson = fs.readFileSync("package.json", "utf8");
   const packageJson = JSON.parse(rawPackageJson);
 
-  if (!gitRef) {
+  if (!gitRef.startsWith("refs/tags/")) {
     throw new Error("Current commit is not tagged in git");
   }
 
