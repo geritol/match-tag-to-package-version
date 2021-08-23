@@ -28,6 +28,17 @@ jobs:
         env:
           CI: true
 
+  test-generated-files: # make sure dist is generated properly
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      - run: npm ci
+      - run: npm run publish
+      - run: git diff --exit-code
+
   test-e2e: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:
