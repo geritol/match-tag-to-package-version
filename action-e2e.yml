@@ -1,0 +1,8 @@
+name: "match-tag-to-package-version"
+description: "Makes sure that git tag and version in package.json match"
+runs:
+  using: "node12"
+  main: "dist-e2e/index.js"
+branding:
+  icon: "tag"
+  color: "yellow"

@@ -43,8 +43,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      - run: npm ci
+      - run: npm run publish-e2e
       - run: |
-          echo "{\"version\": \"${GITHUB_REF}\"}" > package.json
+          echo "{\"version\": \"0.0.0\"}" > package.json
+          mv action-e2e.yml action.yml
       - uses: ./
-        env:
-          TAG_PREFIX: ""
+        with:
+          GITHUB_REF: refs/tags/0.0.0

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "npm run test -- --watch",
-    "publish": "ncc build --source-map "
+    "publish": "ncc build --source-map",
+    "publish-e2e": "ncc build --source-map src/e2e.js -o dist-e2e"
   },
   "repository": {
     "type": "git",
