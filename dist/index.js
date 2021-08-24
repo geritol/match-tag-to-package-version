@@ -513,15 +513,21 @@ exports.toCommandProperties = toCommandProperties;
 const fs = __nccwpck_require__(747);
 const core = __nccwpck_require__(186);
 
-module.exports = (gitRef, prefix = "refs/tags/") => {
+module.exports = (gitRef, prefix = "") => {
   const rawPackageJson = fs.readFileSync("package.json", "utf8");
   const packageJson = JSON.parse(rawPackageJson);
 
-  if (!gitRef) {
+  const refsTags = "refs/tags/"
+  if (!gitRef.startsWith(refsTags)) {
     throw new Error("Current commit is not tagged in git");
   }
 
   const { version } = packageJson;
+  
+  if(!prefix.startsWith(refsTags)){
+    prefix = `${refsTags}${prefix}`;
+  }
+  
   const prefixedVersion = `${prefix}${version}`;
 
   if (gitRef !== prefixedVersion) {
@@ -535,6 +541,7 @@ module.exports = (gitRef, prefix = "refs/tags/") => {
   );
 
   core.setOutput("PACKAGE_VERSION", version);
+  core.setOutput("TAG_VERSION", gitRef.substring(refsTags.length));
 };
 
 
@@ -609,7 +616,8 @@ const matchVersion = __nccwpck_require__(230);
 const core = __nccwpck_require__(186);
 
 try {
-  matchVersion(process.env.GITHUB_REF, process.env.TAG_PREFIX);
+  const prefix = process.env.INPUT_TAG_PREFIX ? process.env.INPUT_TAG_PREFIX : process.env.TAG_PREFIX
+  matchVersion(process.env.GITHUB_REF, prefix);
 } catch (error) {
   core.error(error.message);
   process.exit(1);
