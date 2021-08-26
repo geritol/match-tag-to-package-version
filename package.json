@@ -6,8 +6,9 @@
   "scripts": {
     "test": "jest",
     "test:watch": "npm run test -- --watch",
-    "publish": "ncc build --source-map",
-    "publish-e2e": "ncc build --source-map src/e2e.js -o dist-e2e"
+    "publish": "ncc build src/index.ts --source-map",
+    "publish-e2e": "ncc build --source-map src/e2e.ts -o dist-e2e",
+    "type-check": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -26,9 +27,17 @@
   },
   "homepage": "https://github.com/geritol/match-tag-to-package-version#readme",
   "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-typescript": "^7.15.0",
+    "@types/jest": "^27.0.1",
+    "@types/mock-fs": "^4.13.1",
+    "@types/node": "^16.7.2",
     "@vercel/ncc": "^0.29.2",
+    "babel-jest": "^27.0.6",
     "jest": "^27.0.6",
-    "mock-fs": "^5.0.0"
+    "mock-fs": "^5.0.0",
+    "typescript": "^4.3.5"
   },
   "dependencies": {
     "@actions/core": "^1.5.0"

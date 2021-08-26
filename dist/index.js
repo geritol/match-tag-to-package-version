@@ -1,10 +1,10 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 241:
+/***/ 351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
-"use strict";
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -103,7 +103,6 @@ function escapeProperty(s) {
 /***/ 186:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
-"use strict";
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -135,7 +134,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
-const command_1 = __nccwpck_require__(241);
+const command_1 = __nccwpck_require__(351);
 const file_command_1 = __nccwpck_require__(717);
 const utils_1 = __nccwpck_require__(278);
 const os = __importStar(__nccwpck_require__(87));
@@ -415,7 +414,6 @@ exports.getState = getState;
 /***/ 717:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
-"use strict";
 
 // For internal use, subject to change.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
@@ -464,7 +462,6 @@ exports.issueCommand = issueCommand;
 /***/ 278:
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -507,50 +504,9 @@ exports.toCommandProperties = toCommandProperties;
 
 /***/ }),
 
-/***/ 230:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const fs = __nccwpck_require__(747);
-const core = __nccwpck_require__(186);
-
-module.exports = (gitRef, prefix = "") => {
-  const rawPackageJson = fs.readFileSync("package.json", "utf8");
-  const packageJson = JSON.parse(rawPackageJson);
-
-  const refsTags = "refs/tags/"
-  if (!gitRef.startsWith(refsTags)) {
-    throw new Error("Current commit is not tagged in git");
-  }
-
-  const { version } = packageJson;
-  
-  if(!prefix.startsWith(refsTags)){
-    prefix = `${refsTags}${prefix}`;
-  }
-  
-  const prefixedVersion = `${prefix}${version}`;
-
-  if (gitRef !== prefixedVersion) {
-    throw new Error(
-      `Git tag (${gitRef}) does not match package.json version (${prefixedVersion})`
-    );
-  }
-
-  core.info(
-    `Git tag (${gitRef}) matches package.json version (${prefixedVersion})`
-  );
-
-  core.setOutput("PACKAGE_VERSION", version);
-  core.setOutput("TAG_VERSION", gitRef.substring(refsTags.length));
-};
-
-
-/***/ }),
-
 /***/ 747:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("fs");
 
 /***/ }),
@@ -558,7 +514,6 @@ module.exports = require("fs");
 /***/ 87:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("os");
 
 /***/ }),
@@ -566,7 +521,6 @@ module.exports = require("os");
 /***/ 622:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("path");
 
 /***/ })
@@ -604,6 +558,17 @@ module.exports = require("path");
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__nccwpck_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
@@ -612,15 +577,49 @@ module.exports = require("path");
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const matchVersion = __nccwpck_require__(230);
-const core = __nccwpck_require__(186);
+// ESM COMPAT FLAG
+__nccwpck_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: external "fs"
+var external_fs_ = __nccwpck_require__(747);
+// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
+var core = __nccwpck_require__(186);
+;// CONCATENATED MODULE: ./src/match-version.ts
+
+
+/* harmony default export */ const match_version = (function (gitRef, prefix) {
+    if (prefix === void 0) { prefix = ""; }
+    var rawPackageJson = external_fs_.readFileSync("package.json", "utf8");
+    var packageJson = JSON.parse(rawPackageJson);
+    var refsTags = "refs/tags/";
+    if (!gitRef.startsWith(refsTags)) {
+        throw new Error("Current commit is not tagged in git");
+    }
+    var version = packageJson.version;
+    if (!prefix.startsWith(refsTags)) {
+        prefix = "" + refsTags + prefix;
+    }
+    var prefixedVersion = "" + prefix + version;
+    if (gitRef !== prefixedVersion) {
+        throw new Error("Git tag (" + gitRef + ") does not match package.json version (" + prefixedVersion + ")");
+    }
+    core.info("Git tag (" + gitRef + ") matches package.json version (" + prefixedVersion + ")");
+    core.setOutput("PACKAGE_VERSION", version);
+    core.setOutput("TAG_VERSION", gitRef.substring(refsTags.length));
+});
+
+;// CONCATENATED MODULE: ./src/index.ts
+
 
 try {
-  const prefix = process.env.INPUT_TAG_PREFIX ? process.env.INPUT_TAG_PREFIX : process.env.TAG_PREFIX
-  matchVersion(process.env.GITHUB_REF, prefix);
-} catch (error) {
-  core.error(error.message);
-  process.exit(1);
+    var prefix = process.env.INPUT_TAG_PREFIX
+        ? process.env.INPUT_TAG_PREFIX
+        : process.env.TAG_PREFIX;
+    match_version(process.env.GITHUB_REF || "", prefix);
+}
+catch (error) {
+    core.error(error.message);
+    process.exit(1);
 }
 
 })();
