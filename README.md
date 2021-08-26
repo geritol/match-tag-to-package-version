@@ -24,10 +24,10 @@ jobs:
 
       - name: match-tag-to-package-version
         id: match-tag-to-package-version
-        uses: geritol/match-tag-to-package-version@0.1.0
+        uses: geritol/match-tag-to-package-version@0.2.0
         with:
           TAG_PREFIX: v # Optional, default prefix is ""
-          # TAG_PREFIX may also be defined under the 'env' key. 
+          # TAG_PREFIX may also be defined under the 'env' key.
 ```
 
 The action outputs package.json version as `PACKAGE_VERSION` and the tag (without 'refs/tags/') as `TAG_VERSION`.  

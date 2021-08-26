@@ -1,6 +1,6 @@
 {
   "name": "match-tag-to-package-version",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A github action that makes sure that git tag and version in package.json match",
   "main": "src/index.js",
   "scripts": {
