@@ -6,3 +6,12 @@ runs:
 branding:
   icon: "tag"
   color: "yellow"
+inputs:
+  TAG_PREFIX:
+    description: "Tag prefix used in git (eg. v)"
+    required: false
+outputs:
+  PACKAGE_VERSION:
+    description: "Version of the package (in package.json)"
+  TAG_VERSION:
+    description: "Version of the package in git"
