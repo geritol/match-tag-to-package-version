@@ -1,6 +1,6 @@
-const matchVersion = require("./match-version");
-const mock = require("mock-fs");
-const core = require("@actions/core");
+import matchVersion from "./match-version";
+import mock from "mock-fs";
+import * as core from "@actions/core";
 
 jest.mock("@actions/core", () => ({
   info: jest.fn(),
@@ -41,7 +41,7 @@ describe("matchVersion", () => {
       "package.json": JSON.stringify({ version }),
     });
 
-    expect(() => matchVersion("refs/heads/master")).toThrow(Error, "not tagged");
+    expect(() => matchVersion("refs/heads/master")).toThrow(/not tagged/);
   });
 
   it("should throw an error there is no package.json present", () => {
@@ -56,8 +56,7 @@ describe("matchVersion", () => {
       "package.json": "hello there",
     });
     expect(() => matchVersion(`refs/tags/some-tag`)).toThrow(
-      Error,
-      "Unexpected token"
+      /Unexpected token/
     );
   });
 

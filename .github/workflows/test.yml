@@ -24,6 +24,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
+      - run: npm run type-check
       - run: npm test
 
   test-generated-files: # make sure dist is generated properly
