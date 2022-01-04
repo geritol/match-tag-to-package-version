@@ -1,3 +1,5 @@
+[![geritol/match-tag-to-package-version user count](https://img.shields.io/endpoint?url=https%3A%2F%2Factions.geritol.tech%2Fapi%2Fgeritol%2Fmatch-tag-to-package-version%3Fformat%3Dshields.io&cacheSeconds=3600)](https://actions.geritol.tech/geritol/match-tag-to-package-version)
+
 # match-tag-to-package-version
 
 A github action that makes sure that git tag and version in package.json match
